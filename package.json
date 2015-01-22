@@ -1,0 +1,26 @@
+{
+  "name": "bail-out",
+  "version": "0.0.0",
+  "description": "calls callback with error in nextTick",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ralphtheninja/bail-out"
+  },
+  "keywords": [
+    "error",
+    "nextTick"
+  ],
+  "author": "Lars-Magnus Skog <ralphtheninja@riseup.net>",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/ralphtheninja/bail-out/issues"
+  },
+  "homepage": "https://github.com/ralphtheninja/bail-out",
+  "devDependencies": {
+    "tape": "^3.4.0"
+  }
+}
