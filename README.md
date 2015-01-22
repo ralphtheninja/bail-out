@@ -29,6 +29,6 @@ function checkThisOut(opts, cb) {
 ```
 
 ## License
-WTFPL
+All code, unless stated otherwise, is licensed under the [`WTFPL`](http://www.wtfpl.net/txt/copying/).
 
 
