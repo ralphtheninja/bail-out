@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ralphtheninja/bail-out.svg)](https://travis-ci.org/ralphtheninja/bail-out)
+[![Build Status](https://travis-ci.org/ralphtheninja/bail-out.svg?branch=master)](https://travis-ci.org/ralphtheninja/bail-out)
 
 # bail-out
 
