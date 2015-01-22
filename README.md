@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ralphtheninja/bail-out.svg)](https://travis-ci.org/ralphtheninja/bail-out)
+
 # bail-out
 
 Wraps `process.nextTick` and its callback around a call to a callback with an error. Can be useful if you want to exit out many times with an error e.g. during validation.
@@ -7,7 +9,7 @@ It will not save your ass like [`dezalgo`](https://github.com/npm/dezalgo) does.
 ## Install
 
 ```
-$ npm install bail-out
+$ npm install bail-out --save
 ```
 
 ## Usage
