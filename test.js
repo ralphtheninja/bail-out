@@ -3,8 +3,8 @@ var exit = require('./')
 
 test('throws errors on invalid parameters', function (t) {
   var msg = /Error message must be string or Error/
-  t.throws(function () { exit() }, /Error message must be string or Error/)
-  t.throws(function () { exit(5) }, /Error message must be string or Error/)
+  t.throws(function () { exit() }, /Missing callback/)
+  t.throws(function () { exit(5) }, /Missing callback/)
   t.throws(function () { exit('foo') }, /Missing callback/)
   t.end()
 })
@@ -16,21 +16,13 @@ test('does not throw on valid parameters', function (t) {
   })
 })
 
-test('string parameter converts to Error in callback', function (t) {
+test('callback is called with correct parameters', function (t) {
   var msg = 'some error message'
-  exit(msg, function (err) {
-    t.ok(err && err instanceof Error, 'There is an error')
-    t.equal(err.message, msg)
+  var cb = function () {
+    var _args = [].slice.apply(arguments)
+    t.deepEqual(_args, args, 'arguments are identical')
     t.end()
-  })
+  }
+  var args = [ null, msg, cb ]
+  exit.apply(null, args)
 })
-
-test('Error parameter is used in callback', function (t) {
-  var msg = new Error('some error message')
-  exit(msg, function (err) {
-    t.ok(err && err instanceof Error, 'There is an error')
-    t.deepEqual(err, msg)
-    t.end()
-  })
-})
-
