@@ -6,6 +6,8 @@ function bail() {
   var cb = args[args.length - 1]
   if (typeof cb != 'function') throw new TypeError('Missing callback')
 
+  args.splice(args.length - 1)
+
   process.nextTick(function () {
     cb.apply(null, args)
   })

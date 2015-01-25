@@ -17,12 +17,14 @@ test('does not throw on valid parameters', function (t) {
 })
 
 test('callback is called with correct parameters', function (t) {
-  var msg = 'some error message'
-  var cb = function () {
-    var _args = [].slice.apply(arguments)
-    t.deepEqual(_args, args, 'arguments are identical')
+  var param1 = null
+  var param2 = 'some string here'
+  var param3 = Date.now()
+  exit(param1, param2, param3, function () {
+    var args = [].slice.apply(arguments)
+    t.equal(args[0], param1, 'arguments are identical')
+    t.equal(args[1], param2, 'arguments are identical')
+    t.equal(args[2], param3, 'arguments are identical')
     t.end()
-  }
-  var args = [ null, msg, cb ]
-  exit.apply(null, args)
+  })
 })
