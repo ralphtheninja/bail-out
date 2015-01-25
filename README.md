@@ -2,7 +2,7 @@
 
 # bail-out
 
-Wraps `process.nextTick` and its callback around a call to a callback with an error. Can be useful if you want to exit out many times with an error e.g. during validation.
+Takes all parameters but the last (the callback) and calls the callback with the first parameters on `process.nextTick`. Use case is where you need to bail out early many times e.g. during validation.
 
 It will not save your ass like [`dezalgo`](https://github.com/npm/dezalgo) does.
 
@@ -14,6 +14,8 @@ $ npm install bail-out --save
 
 ## Usage
 
+With `bail-out`.
+
 ```js
 var bail = require('bail-out')
 var fs = require('fs')
@@ -21,10 +23,39 @@ var path = require('path')
 var home = require('home-dir')
 
 function checkThisOut(opts, cb) {
-  if (typeof opts.foo != 'string') return bail('no foo string yo!', cb)
-  if (typeof opts.bar != 'number') return bail('getting closer', cb)
-  if (typeof opts.baz != 'string') return bail('one last check..', cb)
-  fs.readFile(path.join(home(), opts.foo, opts.bar, opts.baz), cb)
+  if (typeof opts.foo != 'string') return bail(new Error('foo not string'), cb)
+  fs.readFile(path.join(home(), opts.foo), cb)
+}
+
+function checkThatOut(opts, cb) {
+  if (typeof opts.bar != 'number') return bail(new Error('bar not number'), cb)
+  fs.readFile(path.join(home(), opts.bar), cb)
+}
+```
+
+Without `bail-out`.
+
+```js
+var fs = require('fs')
+var path = require('path')
+var home = require('home-dir')
+
+function checkThisOut(opts, cb) {
+  if (typeof opts.foo != 'string') {
+     return process.nextTick(function () {
+       cb(new Error('foo not string'))
+     })
+  }
+  fs.readFile(path.join(home(), opts.foo), cb)
+}
+
+function checkThatOut(opts, cb) {
+  if (typeof opts.bar != 'number') {
+     return process.nextTick(function () {
+       cb(new Error('bar not number'))
+     })
+  }
+  fs.readFile(path.join(home(), opts.bar, cb)
 }
 ```
 
