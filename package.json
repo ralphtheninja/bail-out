@@ -1,6 +1,6 @@
 {
   "name": "bail-out",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "calls callback with error in nextTick",
   "main": "index.js",
   "scripts": {
